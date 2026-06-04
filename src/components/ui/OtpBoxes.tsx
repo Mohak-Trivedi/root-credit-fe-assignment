@@ -1,4 +1,15 @@
+import {
+  forwardRef,
+  useEffect,
+  useId,
+  useImperativeHandle,
+} from "react";
+
 import { useOtpInput } from "../../hooks/useOtpInput.ts";
+
+export type OtpBoxesHandle = {
+  focusFirst: () => void;
+};
 
 export type OtpBoxesProps = {
   value: string;
@@ -6,20 +17,28 @@ export type OtpBoxesProps = {
   length?: number;
   error?: string;
   disabled?: boolean;
+  autoFocus?: boolean;
 };
 
-export function OtpBoxes({
-  value,
-  onChange,
-  length = 4,
-  error,
-  disabled = false,
-}: OtpBoxesProps) {
-  const { digits, setRef, handleChange, handleKeyDown, handlePaste } = useOtpInput({
-    value,
-    onChange,
-    length,
-  });
+export const OtpBoxes = forwardRef<OtpBoxesHandle, OtpBoxesProps>(function OtpBoxes(
+  { value, onChange, length = 4, error, disabled = false, autoFocus = false },
+  ref,
+) {
+  const { digits, setRef, focusInput, handleChange, handleKeyDown, handlePaste } =
+    useOtpInput({
+      value,
+      onChange,
+      length,
+    });
+  const errorId = useId();
+
+  useImperativeHandle(ref, () => ({ focusFirst: () => focusInput(0) }), [focusInput]);
+
+  useEffect(() => {
+    if (autoFocus) {
+      focusInput(0);
+    }
+  }, [autoFocus, focusInput]);
 
   return (
     <div className="flex w-full flex-col gap-2">
@@ -34,7 +53,9 @@ export function OtpBoxes({
             maxLength={length}
             value={digit}
             disabled={disabled}
+            aria-label={`Digit ${index + 1} of ${length}`}
             aria-invalid={error ? true : undefined}
+            aria-describedby={error ? errorId : undefined}
             onChange={(event) => handleChange(index, event.target.value)}
             onKeyDown={(event) => handleKeyDown(index, event)}
             onPaste={handlePaste}
@@ -48,10 +69,10 @@ export function OtpBoxes({
         ))}
       </div>
       {error ? (
-        <p className="text-left text-sm text-red-600" role="alert">
+        <p id={errorId} className="text-left text-sm text-red-600" role="alert">
           {error}
         </p>
       ) : null}
     </div>
   );
-}
+});

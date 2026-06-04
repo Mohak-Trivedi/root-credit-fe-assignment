@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { DEFAULT_COUNTRY_CODE } from "../../constants/countryCodes.ts";
@@ -25,6 +26,7 @@ export function MobileNumberStep() {
     watch,
     getValues,
     setValue,
+    setFocus,
     formState: { errors },
   } = useForm<MobileFormValues>({
     resolver: zodResolver(mobileSchema),
@@ -36,6 +38,10 @@ export function MobileNumberStep() {
 
   const countryCode = watch("countryCode");
   const iso = isoForDialCode(countryCode);
+
+  useEffect(() => {
+    setFocus("mobile");
+  }, [setFocus]);
 
   const onSubmit = handleSubmit((values) => {
     setData(values);

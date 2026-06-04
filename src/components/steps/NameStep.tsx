@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import { useRegistration } from "../../hooks/useRegistration.ts";
@@ -17,6 +18,7 @@ export function NameStep() {
   const {
     register,
     handleSubmit,
+    setFocus,
     formState: { errors },
   } = useForm<NameFormValues>({
     resolver: zodResolver(nameSchema),
@@ -25,6 +27,10 @@ export function NameStep() {
       lastName: data.lastName ?? "",
     },
   });
+
+  useEffect(() => {
+    setFocus("firstName");
+  }, [setFocus]);
 
   const onSubmit = handleSubmit((values) => {
     setData(values);

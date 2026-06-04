@@ -1,11 +1,14 @@
 import { RegistrationProvider } from "./context/RegistrationContext.tsx";
+import { ToastProvider } from "./context/ToastContext.tsx";
 import { RegistrationWizard } from "./components/RegistrationWizard.tsx";
 
 function App() {
   return (
-    <RegistrationProvider>
-      <RegistrationWizard />
-    </RegistrationProvider>
+    <ToastProvider>
+      <RegistrationProvider>
+        <RegistrationWizard />
+      </RegistrationProvider>
+    </ToastProvider>
   );
 }
 

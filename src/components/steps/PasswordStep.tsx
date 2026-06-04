@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import { useRegistration } from "../../hooks/useRegistration.ts";
@@ -22,6 +23,7 @@ export function PasswordStep() {
   const {
     register,
     handleSubmit,
+    setFocus,
     formState: { errors },
   } = useForm<PasswordFormValues>({
     resolver: zodResolver(passwordSchema),
@@ -30,6 +32,10 @@ export function PasswordStep() {
       confirmPassword: data.password ?? "",
     },
   });
+
+  useEffect(() => {
+    setFocus("password");
+  }, [setFocus]);
 
   const onSubmit = handleSubmit((values) => {
     setData({ password: values.password });

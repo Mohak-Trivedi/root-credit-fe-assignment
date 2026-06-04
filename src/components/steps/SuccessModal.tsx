@@ -26,16 +26,23 @@ export function SuccessModal() {
   return (
     <Modal
       open={isComplete}
-      ariaLabel="Registration complete"
+      ariaLabelledby="success-modal-title"
+      ariaDescribedby="success-modal-description"
       className="w-[479px] max-w-[479px]"
     >
       <div className="flex flex-col gap-6 text-center">
         <CircleCheck className="mx-auto" color="#4B59D5" size={48} aria-hidden />
         <div>
-          <h2 className="font-open-sans text-[24px] font-semibold text-[#132C4A]">
+          <h2
+            id="success-modal-title"
+            className="font-open-sans text-[24px] font-semibold text-[#132C4A]"
+          >
             You&apos;re all set!
           </h2>
-          <p className="mt-2 font-open-sans text-[14px] font-normal text-[#565656]">
+          <p
+            id="success-modal-description"
+            className="mt-2 font-open-sans text-[14px] font-normal text-[#565656]"
+          >
             Here&apos;s a quick summary of your account details
           </p>
         </div>
@@ -55,7 +62,7 @@ export function SuccessModal() {
         </p>
 
         <div className="flex justify-center">
-          <Button type="button" className="w-[250px]" onClick={reset}>
+          <Button type="button" className="w-[250px]" onClick={reset} autoFocus>
             Go To Dashboard
           </Button>
         </div>

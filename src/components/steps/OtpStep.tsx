@@ -1,15 +1,19 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { getStepMeta } from "../../constants/steps.ts";
 import { useRegistration } from "../../hooks/useRegistration.ts";
+import { useToast } from "../../hooks/useToast.ts";
 import { otpSchema, type OtpFormValues } from "../../schemas/registrationSchemas.ts";
 import { StepShell } from "../common/StepShell.tsx";
-import { OtpBoxes } from "../ui/OtpBoxes.tsx";
+import { OtpBoxes, type OtpBoxesHandle } from "../ui/OtpBoxes.tsx";
 
 export function OtpStep() {
   const { data, setData, next } = useRegistration();
+  const { showToast } = useToast();
   const { title, subtitle } = getStepMeta("otp");
+  const otpBoxesRef = useRef<OtpBoxesHandle>(null);
 
   const {
     control,
@@ -30,6 +34,8 @@ export function OtpStep() {
 
   function handleResend() {
     setValue("otp", "", { shouldValidate: false });
+    otpBoxesRef.current?.focusFirst();
+    showToast("OTP resent successfully", { variant: "success" });
   }
 
   return (
@@ -43,9 +49,11 @@ export function OtpStep() {
         control={control}
         render={({ field }) => (
           <OtpBoxes
+            ref={otpBoxesRef}
             value={field.value}
             onChange={field.onChange}
             error={errors.otp?.message}
+            autoFocus
           />
         )}
       />

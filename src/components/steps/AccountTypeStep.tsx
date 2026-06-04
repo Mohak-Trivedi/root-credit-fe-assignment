@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { useRegistration } from "../../hooks/useRegistration.ts";
@@ -32,6 +32,7 @@ const ACCOUNT_OPTIONS: {
 
 export function AccountTypeStep() {
   const { data, setData, next } = useRegistration();
+  const radioGroupRef = useRef<HTMLDivElement>(null);
 
   const {
     control,
@@ -43,6 +44,19 @@ export function AccountTypeStep() {
       accountType: data.accountType,
     },
   });
+
+  useEffect(() => {
+    const group = radioGroupRef.current;
+    if (!group) {
+      return;
+    }
+    const checked = group.querySelector<HTMLInputElement>(
+      'input[type="radio"]:checked',
+    );
+    const target =
+      checked ?? group.querySelector<HTMLInputElement>('input[type="radio"]');
+    target?.focus();
+  }, []);
 
   const onSubmit = handleSubmit((values) => {
     setData(values);
@@ -64,6 +78,7 @@ export function AccountTypeStep() {
         control={control}
         render={({ field }) => (
           <div
+            ref={radioGroupRef}
             className="flex w-[453px] max-w-full flex-col gap-4"
             role="radiogroup"
             aria-label="Account type"

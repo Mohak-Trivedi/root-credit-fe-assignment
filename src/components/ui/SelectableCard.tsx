@@ -41,6 +41,7 @@ export function SelectableCard({
     <label
       className={[
         "relative flex cursor-pointer items-center gap-4 rounded-xl border bg-white p-5 transition-colors [box-shadow:0px_4px_8px_rgba(188,203,219,0.3)]",
+        "has-focus-visible:ring-2 has-focus-visible:ring-[#0054FD]/40 has-focus-visible:ring-offset-2",
         selected
           ? "border-[#0054FD]"
           : "border-slate-200 hover:border-slate-300",

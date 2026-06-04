@@ -19,8 +19,8 @@ export const STEPS: readonly StepMeta[] = [
   },
   {
     id: "otp",
-    title: "Verify your number",
-    subtitle: "Enter the 4-digit code we sent to your phone",
+    title: "OTP Verification",
+    subtitle: "",
   },
   {
     id: "name",

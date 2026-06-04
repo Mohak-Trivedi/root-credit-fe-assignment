@@ -23,7 +23,7 @@ export function OtpBoxes({
 
   return (
     <div className="flex w-full flex-col gap-2">
-      <div className="flex justify-center gap-3" role="group" aria-label="One-time password">
+      <div className="flex justify-start gap-[57px]" role="group" aria-label="One-time password">
         {digits.map((digit, index) => (
           <input
             key={index}
@@ -39,7 +39,7 @@ export function OtpBoxes({
             onKeyDown={(event) => handleKeyDown(index, event)}
             onPaste={handlePaste}
             className={[
-              "h-14 w-14 rounded-lg border bg-white text-center text-xl font-semibold text-[#132C4A] transition-colors",
+              "h-14 w-14 rounded-lg border bg-white text-center text-[16px] leading-[24px] font-semibold text-[#132C4A] transition-colors",
               "focus:border-[#2563eb] focus:outline-none focus:ring-2 focus:ring-blue-100",
               "disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400",
               error ? "border-red-500 focus:border-red-500 focus:ring-red-100" : "border-slate-200",
@@ -48,7 +48,7 @@ export function OtpBoxes({
         ))}
       </div>
       {error ? (
-        <p className="text-center text-sm text-red-600" role="alert">
+        <p className="text-left text-sm text-red-600" role="alert">
           {error}
         </p>
       ) : null}

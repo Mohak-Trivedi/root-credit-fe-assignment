@@ -2,7 +2,7 @@ import illustration from "../../assets/Artboard11.svg";
 
 export function LeftPanel() {
   return (
-    <div className="absolute inset-0 flex flex-col justify-between pt-[81px] pr-[calc(49.2%+3rem)] pb-12 pl-14">
+    <div className="absolute inset-0 hidden flex-col justify-between pt-[81px] pr-[calc(49.2%+3rem)] pb-12 pl-14 lg:flex">
       <div>
         <p className="text-[24px] font-light text-[#132C4A]">
           Let&apos;s get started

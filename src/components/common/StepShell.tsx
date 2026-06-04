@@ -33,14 +33,14 @@ export function StepShell({
       transition={{ duration: 0.25, ease: "easeOut" }}
       className="flex min-h-0 flex-1 flex-col"
     >
-      <header className="mb-8">
-        <h2 className="text-2xl font-semibold text-[#132C4A]">{title}</h2>
+      <header className="mb-6 lg:mb-8">
+        <h2 className="text-xl font-semibold text-[#132C4A] lg:text-2xl">{title}</h2>
         {subtitle ? (
           <p className="mt-1.5 text-sm text-slate-500">{subtitle}</p>
         ) : null}
       </header>
 
-      <div className="flex flex-1 flex-col gap-6">{children}</div>
+      <div className="flex flex-1 flex-col gap-5 lg:gap-6">{children}</div>
 
       <StepFooter
         onContinue={onContinue}

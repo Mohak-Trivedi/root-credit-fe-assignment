@@ -10,12 +10,12 @@ import {
 import { StepShell } from "../common/StepShell.tsx";
 import { PasswordField } from "../ui/PasswordField.tsx";
 
-const LABEL_CLASS = "text-[18px] leading-[16px] text-[#8292A1]/80";
+const LABEL_CLASS = "text-[15px] leading-[16px] text-[#8292A1]/80 lg:text-[18px]";
 const INPUT_CLASS =
-  "!p-[26px] !pr-12 placeholder:text-[16px] placeholder:leading-6 placeholder:font-normal placeholder:text-[#D9E0E6]/80";
+  "!p-4 !pr-12 lg:!p-[26px] lg:!pr-12 placeholder:text-[16px] placeholder:leading-6 placeholder:font-normal placeholder:text-[#D9E0E6]/80";
 const WRAPPER_CLASS = "gap-3";
 const HELPER_CLASS =
-  "mt-2 text-[16px] font-normal leading-[16px] text-[#8292A1]/80";
+  "mt-2 text-[14px] font-normal leading-[16px] text-[#8292A1]/80 lg:text-[16px]";
 
 export function PasswordStep() {
   const { data, setData, next } = useRegistration();

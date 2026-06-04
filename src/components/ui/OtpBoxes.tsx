@@ -42,7 +42,7 @@ export const OtpBoxes = forwardRef<OtpBoxesHandle, OtpBoxesProps>(function OtpBo
 
   return (
     <div className="flex w-full flex-col gap-2">
-      <div className="flex justify-start gap-[57px]" role="group" aria-label="One-time password">
+      <div className="flex justify-start gap-3 sm:gap-6 lg:gap-[57px]" role="group" aria-label="One-time password">
         {digits.map((digit, index) => (
           <input
             key={index}
@@ -60,7 +60,7 @@ export const OtpBoxes = forwardRef<OtpBoxesHandle, OtpBoxesProps>(function OtpBo
             onKeyDown={(event) => handleKeyDown(index, event)}
             onPaste={handlePaste}
             className={[
-              "h-14 w-14 rounded-lg border bg-white text-center text-[16px] leading-[24px] font-semibold text-[#132C4A] transition-colors",
+              "h-12 w-12 rounded-lg border bg-white text-center text-[16px] leading-[24px] font-semibold text-[#132C4A] transition-colors lg:h-14 lg:w-14",
               "focus:border-[#2563eb] focus:outline-none focus:ring-2 focus:ring-blue-100",
               "disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400",
               error ? "border-red-500 focus:border-red-500 focus:ring-red-100" : "border-slate-200",

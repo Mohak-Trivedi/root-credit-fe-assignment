@@ -7,9 +7,9 @@ import { nameSchema, type NameFormValues } from "../../schemas/registrationSchem
 import { StepShell } from "../common/StepShell.tsx";
 import { TextField } from "../ui/TextField.tsx";
 
-const LABEL_CLASS = "text-[18px] leading-[16px] text-[#8292A1]/80";
+const LABEL_CLASS = "text-[15px] leading-[16px] text-[#8292A1]/80 lg:text-[18px]";
 const INPUT_CLASS =
-  "!p-[26px] placeholder:text-[16px] placeholder:leading-6 placeholder:font-normal placeholder:text-[#D9E0E6]/80";
+  "!p-4 lg:!p-[26px] placeholder:text-[16px] placeholder:leading-6 placeholder:font-normal placeholder:text-[#D9E0E6]/80";
 const WRAPPER_CLASS = "gap-3";
 
 export function NameStep() {

@@ -20,7 +20,7 @@ export function StepFooter({
   const displayBack = showBack ?? canGoBack;
 
   return (
-    <div className="mt-auto flex gap-4 pt-10">
+    <div className="mt-auto flex gap-4 pt-8 lg:pt-10">
       {displayBack ? (
         <Button
           type="button"

@@ -6,11 +6,13 @@ export type TextFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, "id"> &
   error?: string;
   id?: string;
   hideLabel?: boolean;
+  labelClassName?: string;
+  wrapperClassName?: string;
 };
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   function TextField(
-    { label, helperText, error, className = "", id: idProp, hideLabel = false, ...inputProps },
+    { label, helperText, error, className = "", id: idProp, hideLabel = false, labelClassName, wrapperClassName, ...inputProps },
     ref,
   ) {
     const generatedId = useId();
@@ -20,9 +22,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     const describedBy = [errorId, helperId].filter(Boolean).join(" ") || undefined;
 
     return (
-      <div className="flex w-full flex-col gap-1.5">
+      <div className={`flex w-full flex-col ${wrapperClassName ?? "gap-1.5"}`}>
         {hideLabel ? null : (
-          <label htmlFor={id} className="text-sm font-medium text-[#132C4A]">
+          <label htmlFor={id} className={labelClassName ?? "text-sm font-medium text-[#132C4A]"}>
             {label}
           </label>
         )}

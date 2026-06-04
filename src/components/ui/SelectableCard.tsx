@@ -56,10 +56,8 @@ export function SelectableCard({
       />
       <span
         className={[
-          "flex h-12 w-12 shrink-0 items-center justify-center rounded-lg",
-          selected
-            ? "bg-blue-50 text-[#0054FD]"
-            : "bg-slate-100 text-[#132C4A]",
+          "flex shrink-0 items-center justify-center",
+          selected ? "text-[#0054FD]" : "text-[#132C4A]",
         ].join(" ")}
         aria-hidden
       >

@@ -38,9 +38,17 @@ export const otpSchema = z.object({
     .regex(/^\d{4}$/, "Enter a 4-digit code"),
 });
 
+const nameField = (fieldName: string) =>
+  z
+    .string()
+    .trim()
+    .min(1, `${fieldName} is required`)
+    .max(50, `${fieldName} must be 50 characters or fewer`)
+    .regex(/^[A-Za-z\s'\-]+$/, `${fieldName} can only contain letters, spaces, hyphens, and apostrophes`);
+
 export const nameSchema = z.object({
-  firstName: z.string().trim().min(1, "First name is required"),
-  lastName: z.string().trim().min(1, "Last name is required"),
+  firstName: nameField("First name"),
+  lastName: nameField("Last name"),
 });
 
 export const passwordSchema = z

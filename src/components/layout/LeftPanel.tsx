@@ -2,19 +2,24 @@ import illustration from "../../assets/Artboard11.svg";
 
 export function LeftPanel() {
   return (
-    <aside className="relative hidden min-h-screen w-full max-w-[520px] shrink-0 flex-col justify-between bg-[#132C4A] px-10 py-12 text-white lg:flex lg:w-[42%]">
+    <div className="absolute inset-0 flex flex-col justify-between pt-[81px] pr-[calc(49.2%+3rem)] pb-12 pl-14">
       <div>
-        <p className="text-sm font-medium text-white/75">Let&apos;s get started</p>
-        <h1 className="mt-3 text-3xl font-semibold leading-tight tracking-tight">
+        <p className="text-[24px] font-light text-[#132C4A]">
+          Let&apos;s get started
+        </p>
+        <h1 className="mt-3 text-[54px] font-bold leading-tight tracking-tight text-[#132C4A]">
           Create your account
         </h1>
+        <p className="mt-3 text-[16px] text-[#132C4A]">
+          Follow the steps to create your account
+        </p>
       </div>
       <img
         src={illustration}
         alt=""
-        className="mx-auto mt-10 w-full max-w-md object-contain"
+        className="w-full h-auto object-contain"
         aria-hidden
       />
-    </aside>
+    </div>
   );
 }

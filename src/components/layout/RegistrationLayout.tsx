@@ -12,13 +12,11 @@ export function RegistrationLayout({ children }: RegistrationLayoutProps) {
   const { stepIndex } = useRegistration();
 
   return (
-    <div className="flex min-h-screen bg-white font-rubik">
+    <div className="relative h-screen w-full overflow-hidden bg-[#F6F7F9] font-rubik">
       <LeftPanel />
-      <main className="flex min-h-screen flex-1 flex-col px-6 py-8 sm:px-10 lg:px-14 xl:px-16">
+      <main className="absolute top-[81px] right-12 bottom-12 flex w-[49.2%] flex-col overflow-y-auto rounded-2xl bg-white px-12 py-10 shadow-sm">
         <ProgressBar currentStep={stepIndex} />
-        <div className="mx-auto flex w-full max-w-lg flex-1 flex-col pt-10 pb-6">
-          {children}
-        </div>
+        <div className="flex flex-1 flex-col pt-10">{children}</div>
       </main>
     </div>
   );

@@ -25,7 +25,7 @@ export function StepFooter({
         <Button
           type="button"
           variant="secondary"
-          className="min-w-30 shrink-0"
+          className="flex-1"
           onClick={back}
         >
           Back

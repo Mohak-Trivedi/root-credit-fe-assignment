@@ -6,13 +6,12 @@ export type SelectableCardProps = {
   selected: boolean;
   onSelect: (value: string) => void;
   title: string;
-  description?: string;
   icon: ReactNode;
 };
 
 function CheckIcon() {
   return (
-    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#FF7C52] text-white">
+    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#0054FD] text-white">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 16 16"
@@ -36,15 +35,14 @@ export function SelectableCard({
   selected,
   onSelect,
   title,
-  description,
   icon,
 }: SelectableCardProps) {
   return (
     <label
       className={[
-        "relative flex cursor-pointer items-start gap-4 rounded-xl border-2 bg-white p-5 transition-colors",
+        "relative flex cursor-pointer items-center gap-4 rounded-xl border bg-white p-5 transition-colors [box-shadow:0px_4px_8px_rgba(188,203,219,0.3)]",
         selected
-          ? "border-[#2563eb] shadow-sm"
+          ? "border-[#0054FD]"
           : "border-slate-200 hover:border-slate-300",
       ].join(" ")}
     >
@@ -59,20 +57,26 @@ export function SelectableCard({
       <span
         className={[
           "flex h-12 w-12 shrink-0 items-center justify-center rounded-lg",
-          selected ? "bg-blue-50 text-[#2563eb]" : "bg-slate-100 text-[#132C4A]",
+          selected
+            ? "bg-blue-50 text-[#0054FD]"
+            : "bg-slate-100 text-[#132C4A]",
         ].join(" ")}
         aria-hidden
       >
         {icon}
       </span>
-      <span className="flex min-w-0 flex-1 flex-col gap-0.5 pt-0.5">
-        <span className="text-base font-semibold text-[#132C4A]">{title}</span>
-        {description ? (
-          <span className="text-sm text-slate-500">{description}</span>
-        ) : null}
+      <span className="flex min-w-0 flex-1">
+        <span
+          className={[
+            "text-base font-semibold",
+            selected ? "text-[#0054FD]" : "text-[#132C4A]",
+          ].join(" ")}
+        >
+          {title}
+        </span>
       </span>
       {selected ? (
-        <span className="absolute right-4 top-4">
+        <span className="absolute right-4 top-1/2 -translate-y-1/2">
           <CheckIcon />
         </span>
       ) : null}

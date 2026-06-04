@@ -4,8 +4,8 @@ import type { FormEvent, ReactNode } from "react";
 import { StepFooter, type StepFooterProps } from "./StepFooter.tsx";
 
 export type StepShellProps = {
-  title: string;
-  subtitle: string;
+  title: ReactNode;
+  subtitle?: string;
   children: ReactNode;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 } & Pick<
@@ -35,7 +35,9 @@ export function StepShell({
     >
       <header className="mb-8">
         <h2 className="text-2xl font-semibold text-[#132C4A]">{title}</h2>
-        <p className="mt-1.5 text-sm text-slate-500">{subtitle}</p>
+        {subtitle ? (
+          <p className="mt-1.5 text-sm text-slate-500">{subtitle}</p>
+        ) : null}
       </header>
 
       <div className="flex flex-1 flex-col gap-6">{children}</div>

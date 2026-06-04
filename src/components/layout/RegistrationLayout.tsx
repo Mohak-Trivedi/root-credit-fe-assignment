@@ -14,7 +14,7 @@ export function RegistrationLayout({ children }: RegistrationLayoutProps) {
   return (
     <div className="relative h-screen w-full overflow-hidden bg-[#F6F7F9] font-rubik">
       <LeftPanel />
-      <main className="absolute top-[81px] right-12 bottom-12 flex w-[49.2%] flex-col overflow-y-auto rounded-2xl bg-white px-12 py-10 shadow-sm">
+      <main className="absolute top-[81px] right-12 bottom-12 flex w-[49.2%] flex-col overflow-y-auto rounded-2xl bg-white px-16 py-11 shadow-sm">
         <ProgressBar currentStep={stepIndex} />
         <div className="flex flex-1 flex-col pt-10">{children}</div>
       </main>

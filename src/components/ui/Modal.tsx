@@ -7,9 +7,17 @@ export type ModalProps = {
   children: ReactNode;
   /** Accessible label for the dialog when no visible title is passed as children. */
   ariaLabel?: string;
+  /** Extra classes merged onto the dialog content container (e.g. width overrides). */
+  className?: string;
 };
 
-export function Modal({ open, onClose, children, ariaLabel = "Dialog" }: ModalProps) {
+export function Modal({
+  open,
+  onClose,
+  children,
+  ariaLabel = "Dialog",
+  className = "",
+}: ModalProps) {
   useEffect(() => {
     if (!open) {
       return;
@@ -55,7 +63,12 @@ export function Modal({ open, onClose, children, ariaLabel = "Dialog" }: ModalPr
             role="dialog"
             aria-modal="true"
             aria-label={ariaLabel}
-            className="relative z-10 w-full max-w-lg rounded-2xl bg-white p-8 shadow-xl"
+            className={[
+              "relative z-10 w-full max-w-[min(32rem,calc(100vw-2rem))] rounded-2xl bg-white p-8 shadow-xl",
+              className,
+            ]
+              .filter(Boolean)
+              .join(" ")}
             initial={{ opacity: 0, scale: 0.95, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 12 }}

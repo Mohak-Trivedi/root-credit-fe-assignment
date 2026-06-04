@@ -5,6 +5,9 @@ export type PasswordFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, "id
   helperText?: string;
   error?: string;
   id?: string;
+  labelClassName?: string;
+  wrapperClassName?: string;
+  helperClassName?: string;
 };
 
 function EyeIcon({ open }: { open: boolean }) {
@@ -50,7 +53,7 @@ function EyeIcon({ open }: { open: boolean }) {
 
 export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
   function PasswordField(
-    { label, helperText, error, className = "", id: idProp, ...inputProps },
+    { label, helperText, error, className = "", id: idProp, labelClassName, wrapperClassName, helperClassName, ...inputProps },
     ref,
   ) {
     const [visible, setVisible] = useState(false);
@@ -61,43 +64,45 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
     const describedBy = [errorId, helperId].filter(Boolean).join(" ") || undefined;
 
     return (
-      <div className="flex w-full flex-col gap-1.5">
-        <label htmlFor={id} className="text-sm font-medium text-[#132C4A]">
-          {label}
-        </label>
-        <div className="relative">
-          <input
-            ref={ref}
-            id={id}
-            type={visible ? "text" : "password"}
-            aria-invalid={error ? true : undefined}
-            aria-describedby={describedBy}
-            className={[
-              "w-full rounded-lg border bg-white py-3 pl-4 pr-12 text-sm text-[#132C4A] placeholder:text-slate-400 transition-colors",
-              "focus:border-[#2563eb] focus:outline-none focus:ring-2 focus:ring-blue-100",
-              error ? "border-red-500 focus:border-red-500 focus:ring-red-100" : "border-slate-200",
-              className,
-            ]
-              .filter(Boolean)
-              .join(" ")}
-            {...inputProps}
-          />
-          <button
-            type="button"
-            onClick={() => setVisible((current) => !current)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 text-slate-500 transition-colors hover:text-[#132C4A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#132C4A]/25"
-            aria-label={visible ? "Hide password" : "Show password"}
-            tabIndex={-1}
-          >
-            <EyeIcon open={visible} />
-          </button>
+      <div className="flex w-full flex-col">
+        <div className={`flex flex-col ${wrapperClassName ?? "gap-1.5"}`}>
+          <label htmlFor={id} className={labelClassName ?? "text-sm font-medium text-[#132C4A]"}>
+            {label}
+          </label>
+          <div className="relative">
+            <input
+              ref={ref}
+              id={id}
+              type={visible ? "text" : "password"}
+              aria-invalid={error ? true : undefined}
+              aria-describedby={describedBy}
+              className={[
+                "w-full rounded-lg border bg-white py-3 pl-4 pr-12 text-sm text-[#132C4A] transition-colors",
+                "focus:border-[#2563eb] focus:outline-none focus:ring-2 focus:ring-blue-100",
+                error ? "border-red-500 focus:border-red-500 focus:ring-red-100" : "border-slate-200",
+                className,
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              {...inputProps}
+            />
+            <button
+              type="button"
+              onClick={() => setVisible((current) => !current)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 text-slate-500 transition-colors hover:text-[#132C4A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#132C4A]/25"
+              aria-label={visible ? "Hide password" : "Show password"}
+              tabIndex={-1}
+            >
+              <EyeIcon open={visible} />
+            </button>
+          </div>
         </div>
         {error ? (
-          <p id={errorId} className="text-sm text-red-600" role="alert">
+          <p id={errorId} className="mt-2 text-sm text-red-600" role="alert">
             {error}
           </p>
         ) : helperText ? (
-          <p id={helperId} className="text-sm text-slate-500">
+          <p id={helperId} className={helperClassName ?? "mt-2 text-sm text-slate-500"}>
             {helperText}
           </p>
         ) : null}

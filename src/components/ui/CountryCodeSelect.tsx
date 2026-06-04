@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
+import ReactCountryFlag from "react-country-flag";
 
 import {
   COUNTRY_CODES,
@@ -11,6 +12,8 @@ export type CountryCodeSelectProps = {
   onChange: (code: string) => void;
   label?: string;
   error?: string;
+  hideLabel?: boolean;
+  className?: string;
 };
 
 export function CountryCodeSelect({
@@ -18,6 +21,8 @@ export function CountryCodeSelect({
   onChange,
   label = "Country code",
   error,
+  hideLabel = false,
+  className = "",
 }: CountryCodeSelectProps) {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,9 +62,11 @@ export function CountryCodeSelect({
   return (
     <div
       ref={containerRef}
-      className="relative flex w-full min-w-30 flex-col gap-1.5"
+      className={["relative flex flex-col gap-1.5", className].filter(Boolean).join(" ")}
     >
-      <span className="text-sm font-medium text-[#132C4A]">{label}</span>
+      {hideLabel ? null : (
+        <span className="text-sm font-medium text-[#132C4A]">{label}</span>
+      )}
       <button
         type="button"
         aria-haspopup="listbox"
@@ -72,10 +79,15 @@ export function CountryCodeSelect({
           error ? "border-red-500" : "border-slate-200",
         ].join(" ")}
       >
-        <span className="text-lg leading-none" aria-hidden>
-          {selected.flag}
+        <ReactCountryFlag
+          countryCode={selected.iso}
+          svg
+          style={{ width: "1.25em", height: "1.25em" }}
+          aria-hidden
+        />
+        <span className="text-[16px] leading-6 text-[#8292A1]">
+          {selected.code}
         </span>
-        <span className="font-medium">{selected.code}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -115,9 +127,12 @@ export function CountryCodeSelect({
                     : "text-slate-700",
                 ].join(" ")}
               >
-                <span className="text-lg leading-none" aria-hidden>
-                  {option.flag}
-                </span>
+                <ReactCountryFlag
+                  countryCode={option.iso}
+                  svg
+                  style={{ width: "1.25em", height: "1.25em" }}
+                  aria-hidden
+                />
                 <span className="font-medium">{option.code}</span>
                 <span className="truncate text-slate-500">{option.label}</span>
               </button>
